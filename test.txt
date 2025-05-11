@@ -1,0 +1,9 @@
+sqb_331d42cacbb4a33b2c6abd1feda40321e7455828
+
+sqp_baaa4f14edfe91536792649944e13e3bca51aefa
+
+mvn clean verify sonar:sonar \
+  -Dsonar.projectKey=avaWebApp-Project \
+  -Dsonar.projectName='avaWebApp-Project' \
+  -Dsonar.host.url=http://192.168.1.182:9000 \
+  -Dsonar.token=sqp_baaa4f14edfe91536792649944e13e3bca51aefa
