@@ -57,14 +57,15 @@ pipeline {
                 withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
                 sh """
                 mvn sonar:sonar \
-                -Dsonar.projectKey=JavaWebApp-Project \
-                -Dsonar.host.url=http://172.31.19.82:9000 \
-                -Dsonar.login=$SONAR_TOKEN
+                -Dsonar.projectKey=JavaWebApp-QualityGate \
+                -Dsonar.host.url=http://192.168.1.214:9000 \
+                -Dsonar.token=$SONAR_TOKEN
                 """
                 }
             }
         }
     }
+    
     stage('SonarQube GateKeeper') {
         steps {
           timeout(time : 1, unit : 'HOURS'){
@@ -77,7 +78,7 @@ pipeline {
            nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '172.31.38.223:8081',
+              nexusUrl: '192.168.1.214:8081',
               groupId: 'webapp',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
               repository: 'maven-project-releases',  //"${NEXUS_REPOSITORY}",
